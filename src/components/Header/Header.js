@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
-import { COLORS, WEIGHTS } from '../../constants';
+import { QUERIES, WEIGHTS } from '../../constants';
 import Logo from '../Logo';
 import SuperHeader from '../SuperHeader';
 import MobileMenu from '../MobileMenu';
-
+import Icon from '../Icon';
+import VisuallyHidden from '../VisuallyHidden';
+import UnstyledButton from '../UnstyledButton';
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
 
@@ -30,6 +32,23 @@ const Header = () => {
           <NavLink href="/collections">Collections</NavLink>
         </Nav>
         <Side />
+        <MobileBtns >
+          <UnstyledButton>
+
+          <Icon id="shopping-bag" />
+          <VisuallyHidden>Open Cart</VisuallyHidden>
+          </UnstyledButton>
+          <UnstyledButton>
+
+            <Icon id="search" />
+            <VisuallyHidden>Open Cart</VisuallyHidden>
+          </UnstyledButton>
+          <UnstyledButton onClick={() => setShowMobileMenu(true)}>
+
+<Icon id="menu" />
+<VisuallyHidden>Open Cart</VisuallyHidden>
+</UnstyledButton>
+        </MobileBtns>
       </MainHeader>
 
       <MobileMenu
@@ -40,18 +59,41 @@ const Header = () => {
   );
 };
 
+const MobileBtns = styled.div`
+  display: none;
+
+  @media ${QUERIES.tabletAndBelow} {
+    display: flex;
+    gap: 32px;
+  }
+  @media ${QUERIES.phoneAndBelow} {
+    display: flex;
+    gap: 16px;
+  }
+`
+
 const MainHeader = styled.div`
   display: flex;
   align-items: baseline;
   padding: 18px 32px;
-  height: 72px;
-  border-bottom: 1px solid ${COLORS.gray[300]};
+  border-bottom: 1px solid var(--color-gray-300);
+  border-top: 4px solid var(--color-gray-900);
+  overflow: auto;
+  @media ${QUERIES.tabletAndBelow} {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
 `;
 
 const Nav = styled.nav`
   display: flex;
-  gap: 48px;
+  gap: clamp(1rem, 7.1vw - 3.5rem, 2rem);
   margin: 0px 48px;
+
+  @media ${QUERIES.tabletAndBelow} {
+    display: none;
+  }
 `;
 
 const Side = styled.div`
@@ -62,11 +104,11 @@ const NavLink = styled.a`
   font-size: 1.125rem;
   text-transform: uppercase;
   text-decoration: none;
-  color: ${COLORS.gray[900]};
+  color: var(--color-gray-900);
   font-weight: ${WEIGHTS.medium};
 
   &:first-of-type {
-    color: ${COLORS.secondary};
+    color: var(--color-secondary);
   }
 `;
 

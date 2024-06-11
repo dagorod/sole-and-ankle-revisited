@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
-import { COLORS } from '../../constants';
+import { COLORS, QUERIES } from '../../constants';
 
 import SearchInput from '../SearchInput';
 import UnstyledButton from '../UnstyledButton';
@@ -32,6 +32,12 @@ const Wrapper = styled.div`
   height: 40px;
   padding-left: 32px;
   padding-right: 32px;
+
+
+
+  @media ${QUERIES.tabletAndBelow} {
+    display: none;
+  }
 `;
 
 const MarketingMessage = styled.span`
@@ -47,6 +53,8 @@ const HelpLink = styled.a`
   &:not(:focus-visible) {
     outline: none;
   }
+
+  
 `;
 
 export default SuperHeader;
